@@ -43,11 +43,8 @@ export default class Form extends React.Component {
                     }
                 }
             )
-        setTimeout(() => {
-            this.setState({joke: response.data.value.joke})
-            this.setState({parsed: 2})
-        }, 1000)
-
+        this.setState({joke: response.data.value.joke})
+        this.setState({parsed: 2})
     }
 
     getBMI = (weight, height) =>{
