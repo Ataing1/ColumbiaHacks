@@ -62,6 +62,20 @@ export default class Form extends React.Component {
                 //console.error('There was an error!', error);
             });
     }
+    getFunny1 = () =>{
+        this.setState({parsed: 1})
+        let url = "http://api.icndb.com/jokes/random?firstName=" + this.state.fName + "&lastName=" + this.state.lName + "&escape=javascript";
+        fetch(url)
+            .then(response=> {
+                response.json().then(data=>{
+                    alert(data);
+                    this.setState({joke: data.value.joke, parsed: 2});
+                })
+            }).catch(function(err) {
+                alert ("ERRORORR "+ err);
+            });
+
+    }
 
 
     getData = () => {
@@ -112,7 +126,7 @@ export default class Form extends React.Component {
                 <label htmlFor="relatives">Relatives with breast cancer </label>
                 <Checkbox className="CheckBox" style={{color: "white",}}/>
                 <Button variant="contained" color="primary" type={"submit"}
-                        onClick={() => this.getFunny()}>Submit</Button>
+                        onClick={() => this.getFunny1()}>Submit</Button>
             </div>
 
         let post =
