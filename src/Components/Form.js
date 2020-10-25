@@ -64,11 +64,11 @@ export default class Form extends React.Component {
     }
     getFunny1 = () =>{
         this.setState({parsed: 1})
-        let url = "http://api.icndb.com/jokes/random?firstName=" + this.state.fName + "&lastName=" + this.state.lName + "&escape=javascript";
+        let url = "https://api.icndb.com/jokes/random?firstName=" + this.state.fName + "&lastName=" + this.state.lName + "&escape=javascript";
         fetch(url)
             .then(response=> {
                 response.json().then(data=>{
-                    alert(data);
+                    //alert(data);
                     this.setState({joke: data.value.joke, parsed: 2});
                 })
             }).catch(function(err) {
