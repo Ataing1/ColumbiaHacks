@@ -34,6 +34,7 @@ export default class Form extends React.Component {
 
     async getJoke() {
         this.setState({parsed: 1})
+        alert("getting data...")
         const response =
             await axios.get("http://api.icndb.com/jokes/random",
                 {
@@ -43,6 +44,7 @@ export default class Form extends React.Component {
                     }
                 }
             )
+        alert("data received")
         this.setState({joke: response.data.value.joke})
         this.setState({parsed: 2})
     }
