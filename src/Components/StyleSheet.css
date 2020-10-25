@@ -34,9 +34,19 @@ label{
     grid-template-columns: auto auto;
 
 }
+.small{
+    display: grid;
+    grid-template-columns: auto auto;
+}
 
 input[type=text] {
     border: none;
+    color: white;
+    border-bottom: 2px solid white;
+    user-focus: white;
+}
+
+.Select{
     color: white;
     border-bottom: 2px solid white;
     user-focus: white;
