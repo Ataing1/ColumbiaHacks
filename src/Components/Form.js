@@ -59,15 +59,18 @@ export default class Form extends React.Component {
         xhr.addEventListener('load', () => {
             // update the state of the component with the result here
             let result = JSON.parse(xhr.responseText);
-            this.setState({joke: result.value.joke})
-            this.setState({parsed: 2})
-
+            if(result.type==="success"){
+                this.setState({joke: result.value.joke});
+                this.setState({parsed: 2});
+            }else{
+                alert("request failed");
+            }
         })
         // open the request with the verb and the url
         let url = "http://api.icndb.com/jokes/random?firstName=" +this.state.fName + "&lastName=" + this.state.lName + "&escape=javascript";
-        xhr.open('GET', url)
+        xhr.open('GET', url);
         // send the request
-        xhr.send()
+        xhr.send();
     }
 
     getBMI = (weight, height) =>{
