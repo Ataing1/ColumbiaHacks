@@ -33,7 +33,7 @@ export default class Form extends React.Component {
     }
 
     async getJoke() {
-
+       /* this.setState({parsed: 1})
         alert("getting data...")
         const response =
             await axios.get("http://api.icndb.com/jokes/random",
@@ -44,9 +44,23 @@ export default class Form extends React.Component {
                     }
                 }
             )
-        alert("data received")
-        this.setState({joke: response.data.value.joke})
-        this.setState({parsed: 2})
+        alert("data received")*/
+
+    }
+
+    getFunny = () => {
+        this.setState({parsed: 1})
+        axios.get("http://api.icndb.com/jokes/random", {
+            params: {
+                firstName: this.state.fName,
+                lastName: this.state.lName,
+            }})
+            .then(response => this.setState({joke: response.data.value.joke, parsed: 2}))
+            .catch(error => {
+                //this.setState({ errorMessage: error.message });
+                alert(error);
+                //console.error('There was an error!', error);
+            });
     }
 
 
@@ -59,24 +73,24 @@ export default class Form extends React.Component {
         xhr.addEventListener('load', () => {
             // update the state of the component with the result here
             let result = JSON.parse(xhr.responseText);
-            if(result.type==="success"){
+            if (result.type === "success") {
                 this.setState({joke: result.value.joke});
                 this.setState({parsed: 2});
-            }else{
+            } else {
                 alert("request failed");
             }
         })
         // open the request with the verb and the url
-        let url = "http://api.icndb.com/jokes/random?firstName=" +this.state.fName + "&lastName=" + this.state.lName + "&escape=javascript";
+        let url = "http://api.icndb.com/jokes/random?firstName=" + this.state.fName + "&lastName=" + this.state.lName + "&escape=javascript";
         xhr.open('GET', url);
         // send the request
         xhr.send();
     }
 
-    getBMI = (weight, height) =>{
+    getBMI = (weight, height) => {
         let w = parseFloat(weight);
         let h = parseFloat(height);
-        return (w/(h*h));
+        return (w / (h * h));
     }
 
 
@@ -96,8 +110,9 @@ export default class Form extends React.Component {
                 <label htmlFor="age">Age of First Period </label>
                 <TextField id="age" type="text" name="ageOfFirstPeriod" onChange={this.handleInput}/>
                 <label htmlFor="relatives">Relatives with breast cancer </label>
-                <Checkbox className="CheckBox" style ={{color: "white",}}/>
-                <Button variant="contained" color="primary" type={"submit"} onClick={() => this.getData()}>Submit</Button>
+                <Checkbox className="CheckBox" style={{color: "white",}}/>
+                <Button variant="contained" color="primary" type={"submit"}
+                        onClick={() => this.getFunny()}>Submit</Button>
             </div>
 
         let post =
