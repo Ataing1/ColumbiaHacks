@@ -1,0 +1,43 @@
+.Button{
+    width: 100px;
+}
+
+.DropDown{
+
+}
+div{
+    margin-bottom: 20px;
+}
+
+p{
+    margin: 40px
+}
+
+input{
+    text-align: left;
+    width: 150px
+}
+label{
+    display: inline-block;
+    width: 320px;
+    text-align: left;
+}
+
+.CheckBox{
+    padding-left: 40px;
+}
+
+.container{
+    padding: 100px;
+    display: grid;
+    grid-gap: 20px 50px;
+    grid-template-columns: auto auto;
+
+}
+
+input[type=text] {
+    border: none;
+    color: white;
+    border-bottom: 2px solid white;
+    user-focus: white;
+}
