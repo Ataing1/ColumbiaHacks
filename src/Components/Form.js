@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from "axios";
 import './StyleSheet.css';
-import logo from "../logo.svg";
+
+import boob from "../boob.svg";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import TextField from "@material-ui/core/TextField";
@@ -69,8 +70,8 @@ export default class Form extends React.Component {
 
     getPrediction = () => {
         let accessToken = "oo7OxHdS3oUsjPtSL7OKUIEnxRRBH0OAhmpZ0DNs0gEyjR9a6giz1RETpFRXvXwQ";
-        alert(parseInt(this.state.weight) + " "+ this.getFeet(this.state.feet, this.state.inches) + " " +
-            this.state.ageOfFirstPeriod + " "  + this.state.menopause)
+        //alert(parseInt(this.state.weight) + " " + this.getFeet(this.state.feet, this.state.inches) + " " +
+           // this.state.ageOfFirstPeriod + " " + this.state.menopause)
 
         this.setState({parsed: 1})
         axios.post("https://try.dominodatalab.com:443/models/5f950a4bdfc02d36825b27f0/latest/model", {
@@ -89,12 +90,15 @@ export default class Form extends React.Component {
                 }
             })
             .then(response => {
-                alert(JSON.stringify(response.data));
-                alert(JSON.stringify(response.data.result.prob));
-                this.setState({
-                    prob: response.data.result.prob,
-                    parsed: 2
-                });
+                //alert(JSON.stringify(response.data));
+                //alert(JSON.stringify(response.data.result.prob));
+                setTimeout(()=>{
+                    this.setState({
+                        prob: response.data.result.prob,
+                        parsed: 2
+                    });
+                },1000)
+
             })
             .catch(error => {
                 //this.setState({ errorMessage: error.message });
@@ -123,44 +127,47 @@ export default class Form extends React.Component {
 
     render() {
         let pre =
-            <div className="container">
-                <label htmlFor="first">First Name</label>
-                <TextField id="first" type="text" name="fName" onChange={this.handleInput}/>
-                <label htmlFor="last">Last Name</label>
-                <TextField id="last" type="text" name="lName" onChange={this.handleInput}/>
-                <label htmlFor="weight">Weight (in lb)</label>
-                <TextField id="weight" type="text" name="weight" onChange={this.handleInput}/>
-                <div>
-                    <label htmlFor="feet">Height</label>
+            <div>
+                <h1>Boobee</h1>
+                <div className="container">
+                    <label htmlFor="first">First Name</label>
+                    <TextField id="first" type="text" name="fName" onChange={this.handleInput}/>
+                    <label htmlFor="last">Last Name</label>
+                    <TextField id="last" type="text" name="lName" onChange={this.handleInput}/>
+                    <label htmlFor="weight">Weight (in lb)</label>
+                    <TextField id="weight" type="text" name="weight" onChange={this.handleInput}/>
+                    <div>
+                        <label htmlFor="feet">Height</label>
 
+                    </div>
+                    <div>
+                        <TextField InputLabelProps={{
+                            style: {color: '#fff'},
+                        }} id="feet" type="text" name="feet" onChange={this.handleInput} label="Feet"/>
+                        <TextField InputLabelProps={{
+                            style: {color: '#fff'},
+                        }} id="inches" type="text" name="inches" onChange={this.handleInput} label="Inches"/></div>
+                    <label htmlFor="age">Age of First Period </label>
+                    <TextField id="age" type="text" name="ageOfFirstPeriod" onChange={this.handleInput}/>
+                    <label htmlFor="Select">Menopause Status</label>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="Select"
+                        name="menopause"
+                        onChange={this.handleInput}
+                        className="Select"
+                        style={{color: "white"}}
+                    >
+                        <MenuItem value={1}>Pre- or peri-menopausal</MenuItem>
+                        <MenuItem value={2}>Post-menopausal</MenuItem>
+                        <MenuItem value={3}>Surgical menopause</MenuItem>
+                    </Select>
+
+                    <label htmlFor="relatives">Relatives with breast cancer </label>
+                    <Checkbox className="CheckBox" style={{color: "white"}}/>
+                    <Button variant="contained" color="primary" type={"submit"}
+                            onClick={() => this.getPrediction()}>Submit</Button>
                 </div>
-                <div>
-                    <TextField InputLabelProps={{
-                        style: {color: '#fff'},
-                    }} id="feet" type="text" name="feet" onChange={this.handleInput} label="Feet"/>
-                    <TextField InputLabelProps={{
-                        style: {color: '#fff'},
-                    }} id="inches" type="text" name="inches" onChange={this.handleInput} label="Inches"/></div>
-                <label htmlFor="age">Age of First Period </label>
-                <TextField id="age" type="text" name="ageOfFirstPeriod" onChange={this.handleInput}/>
-                <label htmlFor="Select">Menopause Status</label>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="Select"
-                    name="menopause"
-                    onChange={this.handleInput}
-                    className="Select"
-                    style={{color: "white"}}
-                >
-                    <MenuItem value={1}>Pre- or peri-menopausal</MenuItem>
-                    <MenuItem value={2}>Post-menopausal</MenuItem>
-                    <MenuItem value={3}>Surgical menopause</MenuItem>
-                </Select>
-
-                <label htmlFor="relatives">Relatives with breast cancer </label>
-                <Checkbox className="CheckBox" style={{color: "white"}}/>
-                <Button variant="contained" color="primary" type={"submit"}
-                        onClick={() => this.getPrediction()}>Submit</Button>
             </div>
 
         let post =
@@ -172,7 +179,7 @@ export default class Form extends React.Component {
         if (this.state.parsed === 0) {
             ret = pre;
         } else if (this.state.parsed === 1) {
-            ret = <img src={logo} className="App-logo" alt="logo"/>
+            ret = <img src={boob} className="App-logo" alt="logo"/>
         } else {
             ret = post
         }

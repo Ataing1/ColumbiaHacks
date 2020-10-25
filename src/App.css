@@ -13,6 +13,14 @@
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo-1 {
+    animation: App-logo-spin infinite 1s linear;
+  }
+}
+
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

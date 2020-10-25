@@ -23,15 +23,23 @@ label{
     text-align: left;
 }
 
+h1{
+    color: #CE4A7EFF;
+    font-family: "Agency FB", serif;
+    font-size: 100px;
+
+
+}
+
 .CheckBox{
     padding-left: 40px;
 }
 
 .container{
-    padding: 100px;
+    padding: 50px 50px 50px 50px;
     display: grid;
-    grid-gap: 20px 50px;
-    grid-template-columns: auto auto;
+    grid-gap: 20px;
+    grid-template-columns: auto 250px;
 
 }
 .small{
