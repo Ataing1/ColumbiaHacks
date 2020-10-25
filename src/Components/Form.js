@@ -33,7 +33,7 @@ export default class Form extends React.Component {
     }
 
     async getJoke() {
-        this.setState({parsed: 1})
+
         alert("getting data...")
         const response =
             await axios.get("http://api.icndb.com/jokes/random",
@@ -47,6 +47,27 @@ export default class Form extends React.Component {
         alert("data received")
         this.setState({joke: response.data.value.joke})
         this.setState({parsed: 2})
+    }
+
+
+    getData = () => {
+        // create a new XMLHttpRequest
+        this.setState({parsed: 1})
+        let xhr = new XMLHttpRequest()
+
+        // get a callback when the server responds
+        xhr.addEventListener('load', () => {
+            // update the state of the component with the result here
+            let result = JSON.parse(xhr.responseText);
+            this.setState({joke: result.value.joke})
+            this.setState({parsed: 2})
+
+        })
+        // open the request with the verb and the url
+        let url = "http://api.icndb.com/jokes/random?firstName=" +this.state.fName + "&lastName=" + this.state.lName + "&escape=javascript";
+        xhr.open('GET', url)
+        // send the request
+        xhr.send()
     }
 
     getBMI = (weight, height) =>{
@@ -73,7 +94,7 @@ export default class Form extends React.Component {
                 <TextField id="age" type="text" name="ageOfFirstPeriod" onChange={this.handleInput}/>
                 <label htmlFor="relatives">Relatives with breast cancer </label>
                 <Checkbox className="CheckBox" style ={{color: "white",}}/>
-                <Button variant="contained" color="primary" type={"submit"} onClick={() => this.getJoke()}>Submit</Button>
+                <Button variant="contained" color="primary" type={"submit"} onClick={() => this.getData()}>Submit</Button>
             </div>
 
         let post =
